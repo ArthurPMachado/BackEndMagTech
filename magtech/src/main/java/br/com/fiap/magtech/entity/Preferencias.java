@@ -16,6 +16,7 @@ import javax.persistence.Table;
 @SequenceGenerator(name="preferencias", sequenceName="SQ_T_PREFERENCIAS", allocationSize=1)
 @IdClass(PreferenciasPK.class)
 public class Preferencias {
+	
 	@Id
 	@Column(name="cd_preferencias", precision=1)
 	@GeneratedValue(generator="preferencias", strategy=GenerationType.SEQUENCE)

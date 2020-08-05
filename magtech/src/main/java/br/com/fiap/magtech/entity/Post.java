@@ -1,11 +1,11 @@
 package br.com.fiap.magtech.entity;
 
-import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +36,7 @@ public class Post {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="dt_postagem", nullable=false)
-	private Calendar postagem;
+	private long postagem;
 	
 	@Column(name="ds_conteudo", length=4000)
 	private String conteudo;
@@ -53,10 +53,10 @@ public class Post {
 	@JoinColumn(name = "cd_usuario")
 	private Usuario usuario;
 	
-	@OneToOne(mappedBy = "post")
+	@OneToOne(mappedBy = "post", fetch = FetchType.EAGER)
 	private ConfiguracaoGeral configGeral;
 	
-	@OneToMany(mappedBy="post")
+	@OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 	private List<Comentario> comentarios;
 	
 	public void addComentario(Comentario novoComentario) {
@@ -68,7 +68,7 @@ public class Post {
 		super();
 	}
 
-	public Post(String titulo, int visibilidade, Calendar postagem, String conteudo, int reacao, String imagem) {
+	public Post(String titulo, int visibilidade, long postagem, String conteudo, int reacao, String imagem) {
 		super();
 		this.titulo = titulo;
 		this.visibilidade = visibilidade;
@@ -102,11 +102,11 @@ public class Post {
 		this.visibilidade = visibilidade;
 	}
 
-	public Calendar getPostagem() {
+	public long getPostagem() {
 		return postagem;
 	}
 
-	public void setPostagem(Calendar postagem) {
+	public void setPostagem(long postagem) {
 		this.postagem = postagem;
 	}
 

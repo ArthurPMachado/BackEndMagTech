@@ -38,7 +38,7 @@ public class ConfiguracaoGeral {
 	@JoinColumn(name = "cd_mensagem")
 	private Mensagem mensagem;
 
-	@OneToOne
+	@OneToOne(mappedBy = "configGeral")
 	private Preferencias preferencias;
 
 	public ConfiguracaoGeral() {

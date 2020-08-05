@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "cd_usuario")
 public class ProfissionalSaude extends Usuario {
 
-	@Column(name = "ds_identificacao_prof", length = 12, nullable = false, unique = true)
+	@Column(name = "ds_registro", length = 12, nullable = false, unique = true)
 	private String identificacao;
 
 	@Column(name = "ds_cargo", length = 100, nullable = false)

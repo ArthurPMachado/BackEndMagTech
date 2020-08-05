@@ -1,9 +1,8 @@
 package br.com.fiap.magtech.entity;
 
-import java.util.Calendar;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,7 +26,7 @@ public class Mensagem {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "dt_postagem", nullable = false)
-	private Calendar dtPostagem;
+	private long dtPostagem;
 	
 	@Column(name = "ds_conteudo", length = 400)
 	private String conteudo;
@@ -37,14 +36,14 @@ public class Mensagem {
 	
 	// Foreign Key
 	
-	@OneToOne(mappedBy = "mensagem")
+	@OneToOne(mappedBy = "mensagem", fetch = FetchType.EAGER)
 	private ConfiguracaoGeral config;
 
 	@ManyToOne
 	@JoinColumn(name="cd_usuario")
 	private Usuario usuario;
 	
-	public Mensagem(Calendar dtPostagem, String conteudo, String imagem) {
+	public Mensagem(long dtPostagem, String conteudo, String imagem) {
 		super();
 		this.dtPostagem = dtPostagem;
 		this.conteudo = conteudo;
@@ -63,11 +62,11 @@ public class Mensagem {
 		this.codigo = codigo;
 	}
 
-	public Calendar getDtPostagem() {
+	public long getDtPostagem() {
 		return dtPostagem;
 	}
 
-	public void setDtPostagem(Calendar dtPostagem) {
+	public void setDtPostagem(long dtPostagem) {
 		this.dtPostagem = dtPostagem;
 	}
 

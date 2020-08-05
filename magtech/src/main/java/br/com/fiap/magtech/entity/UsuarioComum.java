@@ -14,23 +14,33 @@ public class UsuarioComum extends Usuario{
 	
 	@Column(name = "ds_tipo_sanguineo", nullable = false, length = 3)
 	private String tpSangue;
+	
 	@Column(name = "st_fumante", nullable = false)
 	private boolean fumante;
+	
 	@Column(name = "st_abstemia", nullable = false)
 	private boolean abstemia;
+	
 	@Column(name = "st_doador", nullable = false)
 	private boolean doador;
 	
+	// Campo em string para indicar a uri do documento
 	@Column(name = "fl_exames", length = 200)
 	private String exames;
+	
+	// Campo em string para indicar a uri do documento
 	@Column(name = "fl_historico_consulta", length = 200)
 	private String historico;
+	
 	@Column(name = "st_categoria", precision = 1)
 	private int categoria;
+	
 	@Column(name = "ds_alergia", length = 70)
 	private String alergia;
+	
 	@Column(name = "ds_doenca", length = 70)
 	private String doenca;
+	
 	@Column(name = "ds_remedio_controlado", length = 70)
 	private String remedioCtrl;
 	

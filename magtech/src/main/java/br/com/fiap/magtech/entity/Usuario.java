@@ -1,7 +1,6 @@
 package br.com.fiap.magtech.entity;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -37,7 +36,7 @@ public class Usuario {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "dt_nascimento", nullable = false)
-	private Calendar dtNascimento;
+	private String dtNascimento;
 
 	@Column(name = "fl_foto", length = 200, nullable = false)
 	private String foto;
@@ -66,16 +65,16 @@ public class Usuario {
 	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private Login login;
 	
-	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private ConfiguracaoGeral configGeral;
 	
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 	private List<Post> posts = new ArrayList<Post>();	
 	
-	@OneToMany(mappedBy = "usuario")
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 	private List<Mensagem> mensagens;
 	
-	@OneToMany(mappedBy = "usuario")
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	private List<UsuarioNotificacao> notificacoes;
 	
 	public void addMensagem(Mensagem novaMensagem) {
@@ -87,7 +86,7 @@ public class Usuario {
 		super();
 	}
 
-	public Usuario(String nome, Calendar dtNascimento, String foto, String estado, long telefone,
+	public Usuario(String nome, String dtNascimento, String foto, String estado, long telefone,
 			Genero genero, String bio) {
 		super();
 		this.nome = nome;
@@ -115,11 +114,11 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public Calendar getDtNascimento() {
+	public String getDtNascimento() {
 		return dtNascimento;
 	}
 
-	public void setDtNascimento(Calendar dtNascimento) {
+	public void setDtNascimento(String dtNascimento) {
 		this.dtNascimento = dtNascimento;
 	}
 

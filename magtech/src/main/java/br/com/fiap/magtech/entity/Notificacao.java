@@ -15,6 +15,7 @@ import javax.persistence.Table;
 @Table(name="T_MAGTECH_NOTIFICACAO")
 @SequenceGenerator(name="notif", sequenceName="SQ_T_NOTIFICACAO", allocationSize=1)
 public class Notificacao {
+	
 	@Id
 	@Column(name="cd_notificacao", precision=10)
 	@GeneratedValue(generator="notif", strategy=GenerationType.SEQUENCE)
@@ -26,7 +27,7 @@ public class Notificacao {
 	@Column(name="fl_icone", nullable=false, length=200)
 	private String icone;
 
-	@OneToMany/*(mappedBy = "notificacao")*/
+	@OneToMany(mappedBy = "notificacao")
 	private List<UsuarioNotificacao> notificacoes;
 	
 	public Notificacao() {

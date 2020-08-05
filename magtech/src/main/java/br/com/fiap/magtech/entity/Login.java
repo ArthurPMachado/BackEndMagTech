@@ -26,8 +26,14 @@ public class Login {
 	@Column(name = "ds_senha", nullable = false, length = 25)
 	private String senha;
 	
-	@Column(name = "DS_REGISTRO", length = 12, unique = true)
+	@Column(name = "ds_registro", length = 12, unique = true)
 	private String registro;
+	
+	// Relacionamento
+	
+	@OneToOne
+	@JoinColumn(name = "cd_usuario")
+	private Usuario usuario;
 	
 	public Login(String email, String senha, String registro) {
 		super();
@@ -39,13 +45,6 @@ public class Login {
 	public Login() {
 		super();
 	}
-	
-	// Relacionamento
-	
-	@OneToOne
-	@JoinColumn(name = "cd_usuario")
-	private Usuario usuario;
-	
 	
 	public int getCodigo() {
 		return codigo;

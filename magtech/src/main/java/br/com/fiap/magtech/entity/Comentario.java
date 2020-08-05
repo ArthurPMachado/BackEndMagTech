@@ -1,9 +1,8 @@
 package br.com.fiap.magtech.entity;
 
-import java.util.Calendar;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +17,7 @@ import javax.persistence.TemporalType;
 @Table(name="T_MAGTECH_COMENTARIO")
 @SequenceGenerator(name="comentario", sequenceName="SQ_T_COMENTARIO", allocationSize=1)
 public class Comentario {
+	
 	@Id
 	@Column(name="cd_comentario", precision=11)
 	@GeneratedValue(generator="comentario", strategy=GenerationType.SEQUENCE)
@@ -25,7 +25,7 @@ public class Comentario {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="dt_comentario", nullable=false)
-	private Calendar dataComentario;
+	private long dataComentario;
 	
 	@Column(name="ds_conteudo", length=4000)
 	private String conteudo;
@@ -33,7 +33,7 @@ public class Comentario {
 	@Column(name="fl_imagem", length=200)
 	private String imagem;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="cd_post")
 	private Post post;
 	
@@ -42,7 +42,7 @@ public class Comentario {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Comentario(Calendar dataComentario, String conteudo, String imagem) {
+	public Comentario(long dataComentario, String conteudo, String imagem) {
 		super();
 		this.dataComentario = dataComentario;
 		this.conteudo = conteudo;
@@ -57,11 +57,11 @@ public class Comentario {
 		this.codigo = codigo;
 	}
 
-	public Calendar getDataComentario() {
+	public long getDataComentario() {
 		return dataComentario;
 	}
 
-	public void setDataComentario(Calendar dataComentario) {
+	public void setDataComentario(long dataComentario) {
 		this.dataComentario = dataComentario;
 	}
 

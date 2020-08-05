@@ -1,7 +1,5 @@
 package br.com.fiap.magtech.entity;
 
-import java.util.Calendar;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,6 +14,7 @@ import javax.persistence.TemporalType;
 @Table(name="T_MAGTECH_USUARIO_NOTIFICACAO")
 @IdClass(UsuarioNotificacaoPK.class)
 public class UsuarioNotificacao {
+	
 	@Id
 	@ManyToOne
 	@JoinColumn(name="cd_usuario")
@@ -28,17 +27,17 @@ public class UsuarioNotificacao {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="dt_recebimento", nullable = false)
-	private Calendar recebimento;
+	private long recebimento;
 
 	public UsuarioNotificacao() {
 		super();
 	}
 
-	public Calendar getRecebimento() {
+	public long getRecebimento() {
 		return recebimento;
 	}
 
-	public void setRecebimento(Calendar recebimento) {
+	public void setRecebimento(long recebimento) {
 		this.recebimento = recebimento;
 	}
 
