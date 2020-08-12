@@ -8,6 +8,6 @@ class MagtechApplicationTests {
 
 	@Test
 	void contextLoads() {
+		
 	}
-
 }
