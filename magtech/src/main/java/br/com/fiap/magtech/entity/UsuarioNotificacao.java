@@ -25,7 +25,6 @@ public class UsuarioNotificacao {
 	@JoinColumn(name="cd_notificacao")
 	private Notificacao notificacao;
 	
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="dt_recebimento", nullable = false)
 	private long recebimento;
 

@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -34,7 +35,6 @@ public class Usuario {
 	@Column(name = "nm_usuario", length = 120, nullable = false)
 	private String nome;
 
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "dt_nascimento", nullable = false)
 	private String dtNascimento;
 
@@ -56,14 +56,15 @@ public class Usuario {
 
 	// RELACIONAMENTO
 	
+	@OneToOne
+	@JoinColumn(name = "cd_login")
+	private Login login;
+	
 	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private ProfissionalSaude profSaude;
 	
 	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private UsuarioComum usuarioComum;  
-	
-	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
-	private Login login;
 	
 	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private ConfiguracaoGeral configGeral;
@@ -87,7 +88,7 @@ public class Usuario {
 	}
 
 	public Usuario(String nome, String dtNascimento, String foto, String estado, long telefone,
-			Genero genero, String bio) {
+			Genero genero, String bio, Login login) {
 		super();
 		this.nome = nome;
 		this.dtNascimento = dtNascimento;
@@ -96,6 +97,7 @@ public class Usuario {
 		this.telefone = telefone;
 		this.genero = genero;
 		this.bio = bio;
+		this.login = login;
 	}
 
 	public int getCodigo() {

@@ -3,6 +3,8 @@ package br.com.fiap.magtech.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -16,6 +18,7 @@ public class ConfiguracaoGeral {
 	
 	@Id
 	@Column(name="cd_configuracao", precision=2)
+	@GeneratedValue(generator = "config", strategy = GenerationType.SEQUENCE)
 	private int codigo;
 	
 	@Column(name="st_visibilidade", nullable=false, precision=1)
@@ -38,9 +41,10 @@ public class ConfiguracaoGeral {
 	@JoinColumn(name = "cd_mensagem")
 	private Mensagem mensagem;
 
-	@OneToOne(mappedBy = "configGeral")
-	private Preferencias preferencias;
-
+	/*
+		@OneToOne(mappedBy = "configGeral")
+		private Preferencias preferencias;
+	*/
 	public ConfiguracaoGeral() {
 		super();
 		// TODO Auto-generated constructor stub

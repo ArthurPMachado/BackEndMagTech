@@ -24,7 +24,6 @@ public class Mensagem {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mensagem")
 	private int codigo;
 	
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "dt_postagem", nullable = false)
 	private long dtPostagem;
 	

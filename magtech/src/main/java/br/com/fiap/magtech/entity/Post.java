@@ -34,7 +34,6 @@ public class Post {
 	@Column(name="st_post", nullable=false, precision=1)
 	private int visibilidade;
 	
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="dt_postagem", nullable=false)
 	private long postagem;
 	

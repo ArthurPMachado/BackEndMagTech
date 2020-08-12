@@ -1,11 +1,11 @@
 package br.com.fiap.magtech.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -31,8 +31,7 @@ public class Login {
 	
 	// Relacionamento
 	
-	@OneToOne
-	@JoinColumn(name = "cd_usuario")
+	@OneToOne(mappedBy = "login", cascade = CascadeType.ALL)
 	private Usuario usuario;
 	
 	public Login(String email, String senha, String registro) {
@@ -40,6 +39,12 @@ public class Login {
 		this.email = email;
 		this.senha = senha;
 		this.registro = registro;
+	}
+	
+	public Login(String email, String senha) {
+		super();
+		this.email = email;
+		this.senha = senha;
 	}
 	
 	public Login() {
@@ -70,4 +75,13 @@ public class Login {
 	public void setRegistro(String registro) {
 		this.registro = registro;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
 }

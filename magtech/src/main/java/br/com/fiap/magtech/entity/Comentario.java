@@ -23,7 +23,6 @@ public class Comentario {
 	@GeneratedValue(generator="comentario", strategy=GenerationType.SEQUENCE)
 	private int codigo;
 	
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="dt_comentario", nullable=false)
 	private long dataComentario;
 	
