@@ -40,6 +40,12 @@ public class Comentario {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Comentario(long dataComentario, String conteudo) {
+		super();
+		this.dataComentario = dataComentario;
+		this.conteudo = conteudo;
+	}
 
 	public Comentario(long dataComentario, String conteudo, String imagem) {
 		super();
