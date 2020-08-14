@@ -30,9 +30,21 @@ class ComentarioUnitTest {
 	}
 	
 	@Test
-	@DisplayName("should create a film with sucess")
+	@DisplayName("Should create a comentary with sucess")
 	void createSucess() {
 		assertNotEquals(0, comentario.getCodigo());
+	}
+	
+	@Test
+	@DisplayName("Should get all comentaries with sucess")
+	void listAllSucess() {
+		Comentario comentario1 = repository.save(new Comentario(System.currentTimeMillis(), "Outro comentario", "http://imagemenviada"));
+		Comentario comentario2 = repository.save(new Comentario(System.currentTimeMillis(), "Comentario sem imagem"));
+		Comentario comentario3 = repository.save(new Comentario(System.currentTimeMillis(), "http://apenasimagemnocomentario"));
+		
+		Iterable<Comentario> comentarios = repository.findAll();
+		
+		assertThat(comentarios).hasSize(4).contains(comentario, comentario1, comentario2, comentario3);
 	}
 
 }
