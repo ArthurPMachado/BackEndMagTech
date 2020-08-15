@@ -8,16 +8,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import br.com.fiap.magtech.entity.Comentario;
 import br.com.fiap.magtech.repository.ComentarioRepository;
 
 @DataJpaTest
 class ComentarioUnitTest {
-	
-	@Autowired
-	private TestEntityManager manager;
 	
 	@Autowired
 	private ComentarioRepository repository;
@@ -50,11 +46,16 @@ class ComentarioUnitTest {
 	@Test
 	@DisplayName("Should get single comentary by id with success")
 	void listSingleSuccess() {
-		Comentario comentario1 = repository.save(new Comentario(System.currentTimeMillis(), "Outro comentario", "http://imagemenviada"));
+		// Comentario comentario1 = repository.save(new Comentario(System.currentTimeMillis(), "Outro comentario", "http://imagemenviada"));
 		
-		Comentario unicoComentario = repository.findById(comentario1.getCodigo()).get();
+		Comentario unicoComentario = repository.findById(comentario.getCodigo()).get();
 		
-		assertThat(unicoComentario).isEqualTo(comentario1);
+		System.out.println(unicoComentario.getConteudo());
+		
+		assertThat(unicoComentario).isEqualTo(comentario);
 	}
+	
+	
+	
 
 }
