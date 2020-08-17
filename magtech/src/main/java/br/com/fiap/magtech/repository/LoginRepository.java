@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.fiap.magtech.entity.Login;
 
-public interface PostRepository extends JpaRepository<Login, Integer> {
+public interface LoginRepository extends JpaRepository<Login, Integer> {
 
 }
