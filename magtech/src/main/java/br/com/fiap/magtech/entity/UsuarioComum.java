@@ -7,50 +7,53 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import br.com.fiap.magtech.entity.emum.Genero;
+
 @Entity
 @Table(name = "T_MAGTECH_USUARIO_COMUM")
-@PrimaryKeyJoinColumn(name="cd_usuario")
-public class UsuarioComum extends Usuario{
-	
+@PrimaryKeyJoinColumn(name = "cd_usuario")
+public class UsuarioComum extends Usuario {
+
 	@Column(name = "ds_tipo_sanguineo", nullable = false, length = 3)
 	private String tpSangue;
-	
-	@Column(name = "st_fumante", nullable = false)
-	private boolean fumante;
-	
-	@Column(name = "st_abstemia", nullable = false)
-	private boolean abstemia;
-	
-	@Column(name = "st_doador", nullable = false)
-	private boolean doador;
-	
+
+	@Column(name = "st_fumante", nullable = false, precision = 1)
+	private int fumante;
+
+	@Column(name = "st_abstemia", nullable = false, precision = 1)
+	private int abstemia;
+
+	@Column(name = "st_doador", nullable = false, precision = 1)
+	private int doador;
+
 	// Campo em string para indicar a uri do documento
 	@Column(name = "fl_exames", length = 200)
 	private String exames;
-	
+
 	// Campo em string para indicar a uri do documento
 	@Column(name = "fl_historico_consulta", length = 200)
 	private String historico;
-	
+
 	@Column(name = "st_categoria", precision = 1)
 	private int categoria;
-	
+
 	@Column(name = "ds_alergia", length = 70)
 	private String alergia;
-	
+
 	@Column(name = "ds_doenca", length = 70)
 	private String doenca;
-	
+
 	@Column(name = "ds_remedio_controlado", length = 70)
 	private String remedioCtrl;
-	
+
 	@OneToOne
 	@JoinColumn(name = "cd_usuario")
 	private Usuario usuario;
-	
-	public UsuarioComum(String tpSangue, boolean fumante, boolean abstemia, boolean doador, String exames,
+
+	public UsuarioComum(String nome, String dtNascimento, String foto, String estado, long telefone,
+			Genero genero, Login login, String tpSangue, int fumante, int abstemia, int doador, String exames,
 			String historico, int categoria, String alergia, String doenca, String remedioCtrl) {
-		super();
+		super(nome, dtNascimento, foto, estado, telefone, genero, login);
 		this.tpSangue = tpSangue;
 		this.fumante = fumante;
 		this.abstemia = abstemia;
@@ -61,6 +64,15 @@ public class UsuarioComum extends Usuario{
 		this.alergia = alergia;
 		this.doenca = doenca;
 		this.remedioCtrl = remedioCtrl;
+	}
+
+	public UsuarioComum(String nome, String dtNascimento, String foto, String estado, long telefone,
+			Genero genero, Login login, String tpSangue, int fumante, int abstemia, int doador) {
+		super(nome, dtNascimento, foto, estado, telefone, genero, login);
+		this.tpSangue = tpSangue;
+		this.fumante = fumante;
+		this.abstemia = abstemia;
+		this.doador = doador;
 	}
 
 	public UsuarioComum() {
@@ -75,27 +87,27 @@ public class UsuarioComum extends Usuario{
 		this.tpSangue = tpSangue;
 	}
 
-	public boolean isFumante() {
+	public int isFumante() {
 		return fumante;
 	}
 
-	public void setFumante(boolean fumante) {
+	public void setFumante(int fumante) {
 		this.fumante = fumante;
 	}
 
-	public boolean isAbstemia() {
+	public int isAbstemia() {
 		return abstemia;
 	}
 
-	public void setAbstemia(boolean abstemia) {
+	public void setAbstemia(int abstemia) {
 		this.abstemia = abstemia;
 	}
 
-	public boolean isDoador() {
+	public int isDoador() {
 		return doador;
 	}
 
-	public void setDoador(boolean doador) {
+	public void setDoador(int doador) {
 		this.doador = doador;
 	}
 

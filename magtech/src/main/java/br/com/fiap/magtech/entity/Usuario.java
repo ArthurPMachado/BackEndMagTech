@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -21,6 +23,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.fiap.magtech.entity.emum.Genero;
+
+@Inheritance(strategy = InheritanceType.JOINED)
 
 @Entity
 @Table(name = "T_MAGTECH_USUARIO")
@@ -33,32 +37,32 @@ public class Usuario {
 	private int codigo;
 
 	@Column(name = "nm_usuario", length = 120, nullable = false)
-	private String nome;
+	protected String nome;
 
 	@Column(name = "dt_nascimento", nullable = false)
-	private String dtNascimento;
+	protected String dtNascimento;
 
 	@Column(name = "fl_foto", length = 200, nullable = false)
-	private String foto;
+	protected String foto;
 
 	@Column(name = "ds_estado", length = 2, nullable = false)
-	private String estado;
+	protected String estado;
 
 	@Column(name = "nr_telefone", precision = 11, nullable = false)
-	private long telefone;
+	protected long telefone;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "ds_genero", length = 16, nullable = false)
-	private Genero genero;
+	protected Genero genero;
 
 	@Column(name = "ds_bio", length = 100, nullable = true)
-	private String bio;
+	protected String bio;
 
 	// RELACIONAMENTO
 	
 	@OneToOne
-	@JoinColumn(name = "cd_login")
-	private Login login;
+	@JoinColumn(name = "cd_login", nullable = false)
+	protected Login login;
 	
 	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private ProfissionalSaude profSaude;
@@ -87,6 +91,18 @@ public class Usuario {
 		super();
 	}
 
+	public Usuario(String nome, String dtNascimento, String foto, String estado, long telefone,
+			Genero genero, Login login) {
+		super();
+		this.nome = nome;
+		this.dtNascimento = dtNascimento;
+		this.foto = foto;
+		this.estado = estado;
+		this.telefone = telefone;
+		this.genero = genero;
+		this.login = login;
+	}
+	
 	public Usuario(String nome, String dtNascimento, String foto, String estado, long telefone,
 			Genero genero, String bio, Login login) {
 		super();
