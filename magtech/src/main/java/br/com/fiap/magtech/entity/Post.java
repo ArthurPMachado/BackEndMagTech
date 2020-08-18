@@ -49,7 +49,7 @@ public class Post {
 	// Relacionamentos
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "cd_usuario")
+	@JoinColumn(name = "cd_usuario", nullable = false)
 	private Usuario usuario;
 	
 	@OneToOne(mappedBy = "post", fetch = FetchType.EAGER)
@@ -67,7 +67,16 @@ public class Post {
 		super();
 	}
 
-	public Post(String titulo, int visibilidade, long postagem, String conteudo, int reacao, String imagem) {
+	public Post(String titulo, int visibilidade, long postagem, String conteudo, Usuario usuario) {
+		super();
+		this.titulo = titulo;
+		this.visibilidade = visibilidade;
+		this.postagem = postagem;
+		this.conteudo = conteudo;
+		this.usuario = usuario;
+	}
+	
+	public Post(String titulo, int visibilidade, long postagem, String conteudo, int reacao, String imagem, Usuario usuario) {
 		super();
 		this.titulo = titulo;
 		this.visibilidade = visibilidade;

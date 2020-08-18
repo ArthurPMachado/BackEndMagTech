@@ -33,7 +33,7 @@ public class Comentario {
 	private String imagem;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="cd_post")
+	@JoinColumn(name="cd_post", nullable = false)
 	private Post post;
 	
 	public Comentario() {
@@ -41,17 +41,19 @@ public class Comentario {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Comentario(long dataComentario, String conteudo) {
+	public Comentario(long dataComentario, String conteudo, Post post) {
 		super();
 		this.dataComentario = dataComentario;
 		this.conteudo = conteudo;
+		this.post = post;
 	}
 
-	public Comentario(long dataComentario, String conteudo, String imagem) {
+	public Comentario(long dataComentario, String conteudo, String imagem, Post post) {
 		super();
 		this.dataComentario = dataComentario;
 		this.conteudo = conteudo;
 		this.imagem = imagem;
+		this.post = post;
 	}
 
 	public int getCodigo() {
