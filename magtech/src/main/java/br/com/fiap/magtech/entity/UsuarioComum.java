@@ -51,8 +51,8 @@ public class UsuarioComum extends Usuario {
 	private Usuario usuario;
 
 	public UsuarioComum(String nome, String dtNascimento, String foto, String estado, long telefone,
-			Genero genero, Login login, String tpSangue, int fumante, int abstemia, int doador, String exames,
-			String historico, int categoria, String alergia, String doenca, String remedioCtrl) {
+							Genero genero, Login login, String tpSangue, int fumante, int abstemia, int doador,
+								String exames, String historico, int categoria, String alergia, String doenca, String remedioCtrl) {
 		super(nome, dtNascimento, foto, estado, telefone, genero, login);
 		this.tpSangue = tpSangue;
 		this.fumante = fumante;
@@ -66,8 +66,8 @@ public class UsuarioComum extends Usuario {
 		this.remedioCtrl = remedioCtrl;
 	}
 
-	public UsuarioComum(String nome, String dtNascimento, String foto, String estado, long telefone,
-			Genero genero, Login login, String tpSangue, int fumante, int abstemia, int doador) {
+	public UsuarioComum(String nome, String dtNascimento, String foto, String estado,
+			long telefone, Genero genero, Login login, String tpSangue, int fumante, int abstemia, int doador) {
 		super(nome, dtNascimento, foto, estado, telefone, genero, login);
 		this.tpSangue = tpSangue;
 		this.fumante = fumante;

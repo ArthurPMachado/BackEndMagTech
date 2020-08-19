@@ -7,35 +7,50 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import br.com.fiap.magtech.entity.Login;
 import br.com.fiap.magtech.entity.Post;
+import br.com.fiap.magtech.entity.UsuarioComum;
+import br.com.fiap.magtech.entity.emum.Genero;
+import br.com.fiap.magtech.repository.LoginRepository;
 import br.com.fiap.magtech.repository.PostRepository;
+import br.com.fiap.magtech.repository.UsuarioComumRepository;
 
 @DataJpaTest
 class PostUnitTest {
 	
 	@Autowired
-	private PostRepository repository;
+	private PostRepository postRepository;
+	
+	@Autowired
+	private LoginRepository loginRepository;
+	
+	@Autowired
+	private UsuarioComumRepository usuarioComumRepository;
 	
 	private Post post;
+	private Login usuarioLogin;
+	private UsuarioComum usuarioComum;
 	
 	@BeforeEach
 	@SuppressWarnings("unused")
 	void populateDataForTest() {
-		post = repository.save(new Post("P", 1, 11111111111L, "blablabla", 1, "imagem"));
-		Post post0 = repository.save(new Post("P1", 1, 11111111111L, "blablabla", 1, "imagem"));
-		Post post1 = repository.save(new Post("P2", 1, 11111111111L, "blablabla", 1, "imagem"));
-		Post post2 = repository.save(new Post("P3", 1, 11111111111L, "blablabla", 1, "imagem"));
+		usuarioLogin = loginRepository.save(new Login("algumacoisa@gmail.com", "123456"));
+		usuarioComum = usuarioComumRepository.save(new UsuarioComum("Braufagélio", "01/01/2000", "foto.com", "SP", 924246969 ,Genero.Masculino, usuarioLogin,"AB", 0, 0, 0));
+		
+		post = postRepository.save(new Post("P", 1, 11111111111L, "blablabla", 1, "imagem", usuarioComum));
+		Post postUserComum = postRepository.save(new Post("P1", 1, 11111111111L, "blablabla", 1, "imagem", usuarioComum));
+		Post postUserComum1 = postRepository.save(new Post("P2", 1, 11111111111L, "blablabla", 1, "imagem", usuarioComum));
 	}
 	
 	@Test
 	void createShouldBeSuccessful() {
-		System.out.println(repository.count());
-		assertThat(repository.count()).isEqualTo(4);
+		System.out.println(postRepository.count());
+		assertThat(postRepository.count()).isEqualTo(3);
 	}
 	
 	@Test
 	void UpdateShouldBeSuccessful() {
-		Post updatedPost = repository.findById(post.getCodigo()).get();
+		Post updatedPost = postRepository.findById(post.getCodigo()).get();
 		
 		updatedPost.setConteudo("Novo conteudo");
 		assertThat(updatedPost.getConteudo()).isEqualTo(post.getConteudo());
@@ -43,30 +58,30 @@ class PostUnitTest {
 	
 	@Test
 	void repositoryShouldBeEmpty() {
-		repository.deleteAll();
-		assertThat(repository.count()).isEqualTo(0);
+		postRepository.deleteAll();
+		assertThat(postRepository.count()).isEqualTo(0);
 	}
 	
 	@Test
 	void deleteByIdShouldBeSuccessful() {
-		Post postWillBeDeleted = repository.findById(post.getCodigo()).get();
+		Post postWillBeDeleted = postRepository.findById(post.getCodigo()).get();
 		// expected Size of repository after delete operation
-		long expectedSize = repository.count() - 1;
+		long expectedSize = postRepository.count() - 1;
 		
-		repository.deleteById(postWillBeDeleted.getCodigo());
-		assertThat(repository.count()).isEqualTo(expectedSize);
+		postRepository.deleteById(postWillBeDeleted.getCodigo());
+		assertThat(postRepository.count()).isEqualTo(expectedSize);
 	}
-	
 	
 	@Test
 	void listAllShouldBeSuccessful() {
-		Iterable<Post> posts = repository.findAll();
+		Iterable<Post> posts = postRepository.findAll();
 		
-		assertThat(posts).hasSize((int) repository.count());
+		assertThat(posts).hasSize((int) postRepository.count());
 	}
 	
+	@Test
 	void listByIdShouldBeSuccessful() {
-		Post foundPost = repository.findById(post.getCodigo()).get();
+		Post foundPost = postRepository.findById(post.getCodigo()).get();
 		
 		assertThat(foundPost).isEqualTo(post);
 	}

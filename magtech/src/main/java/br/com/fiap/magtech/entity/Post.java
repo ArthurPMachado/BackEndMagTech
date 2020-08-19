@@ -15,8 +15,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="T_MAGTECH_POST")
@@ -84,6 +82,7 @@ public class Post {
 		this.conteudo = conteudo;
 		this.reacao = reacao;
 		this.imagem = imagem;
+		this.usuario = usuario;
 	}
 
 	public int getCodigo() {
