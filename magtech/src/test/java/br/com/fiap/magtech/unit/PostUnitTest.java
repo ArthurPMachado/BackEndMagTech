@@ -44,7 +44,6 @@ class PostUnitTest {
 	
 	@Test
 	void createShouldBeSuccessful() {
-		System.out.println(postRepository.count());
 		assertThat(postRepository.count()).isEqualTo(3);
 	}
 	
@@ -53,6 +52,9 @@ class PostUnitTest {
 		Post updatedPost = postRepository.findById(post.getCodigo()).get();
 		
 		updatedPost.setConteudo("Novo conteudo");
+		
+		postRepository.save(updatedPost);
+		
 		assertThat(updatedPost.getConteudo()).isEqualTo(post.getConteudo());
 	}
 	

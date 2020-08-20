@@ -38,16 +38,18 @@ public class ProfissionalSaude extends Usuario {
 		this.cargo = cargo;
 		this.nomeInstituicao = nomeInstituicao;
 		this.telefoneInst = telefoneInst;
+		this.login = login;
 	}
 	
 	public ProfissionalSaude(String nome, String dtNascimento, String foto, String estado,
 								long telefone, Genero genero, Login login, String identificacao,
 											String cargo, String nomeInstituicao) {
-			super(nome, dtNascimento, foto, estado, telefone, genero, login);
-			this.identificacao = identificacao;
-			this.cargo = cargo;
-			this.nomeInstituicao = nomeInstituicao;
-			}
+		super(nome, dtNascimento, foto, estado, telefone, genero, login);
+		this.identificacao = identificacao;
+		this.cargo = cargo;
+		this.nomeInstituicao = nomeInstituicao;
+		this.login = login;
+	}
 
 	public ProfissionalSaude(String identificacao, String cargo, String nomeInstituicao, long telefoneInst, Usuario usuario) {
 		super();
