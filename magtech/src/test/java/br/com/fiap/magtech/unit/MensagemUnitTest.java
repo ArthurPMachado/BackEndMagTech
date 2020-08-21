@@ -58,5 +58,23 @@ class MensagemUnitTest {
 		
 		assertThat(mensagem).isEqualTo(updatedMensagem);
 	}
+	
+	@Test
+	void repositoryShouldBeEmpty() {
+		mensagemRepository.deleteAll();
+		
+		assertThat(mensagemRepository.count()).isEqualTo(0);
+	}
+	
+	@Test
+	void deleteByIdShouldBeSuccessful() {
+		Mensagem willBeDeletedMensagem = mensagemRepository.findById(mensagem.getCodigo()).get();
+		
+		long expected = mensagemRepository.count() - 1;
+		
+		mensagemRepository.deleteById(willBeDeletedMensagem.getCodigo());
+		
+		assertThat(mensagemRepository.count()).isEqualTo(expected);
+	}
 
 }
