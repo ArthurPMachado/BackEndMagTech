@@ -29,7 +29,7 @@ import br.com.fiap.magtech.entity.emum.Genero;
 @Entity
 @Table(name = "T_MAGTECH_USUARIO")
 @SequenceGenerator(name = "usuario", sequenceName = "SQ_TB_USUARIO", allocationSize = 1)
-public class Usuario {
+public abstract class Usuario {
 
 	@Id
 	@Column(name = "cd_usuario", nullable = false, precision = 6)

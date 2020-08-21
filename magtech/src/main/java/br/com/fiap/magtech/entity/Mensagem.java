@@ -42,11 +42,19 @@ public class Mensagem {
 	@JoinColumn(name="cd_usuario")
 	private Usuario usuario;
 	
-	public Mensagem(long dtPostagem, String conteudo, String imagem) {
+	public Mensagem(long dtPostagem, String conteudo, String imagem, Usuario usuario) {
 		super();
 		this.dtPostagem = dtPostagem;
 		this.conteudo = conteudo;
 		this.imagem = imagem;
+		this.usuario = usuario;
+	}
+	
+	public Mensagem(long dtPostagem, String conteudo, Usuario usuario) {
+		super();
+		this.dtPostagem = dtPostagem;
+		this.conteudo = conteudo;
+		this.usuario = usuario;
 	}
 	
 	public Mensagem() {
