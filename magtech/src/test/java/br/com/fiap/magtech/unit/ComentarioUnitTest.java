@@ -52,7 +52,11 @@ class ComentarioUnitTest {
 	
 	@Test
 	void createShouldBeSuccessful() {
-		assertThat(comentarioRepository.count()).isEqualTo(3);
+		long expectedTotal = comentarioRepository.count() + 1;
+		
+		Comentario comentario4 = comentarioRepository.save(new Comentario(System.currentTimeMillis(), "Algum comentário feito pelo usuário", "http://imagemenviada", post));
+		
+		assertThat(comentarioRepository.count()).isEqualTo(expectedTotal);
 	}
 	
 	@Test
