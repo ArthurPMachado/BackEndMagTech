@@ -76,5 +76,22 @@ class MensagemUnitTest {
 		
 		assertThat(mensagemRepository.count()).isEqualTo(expected);
 	}
-
+	
+	@Test
+	void listAllShouldBeSuccessful() {
+		Iterable<Mensagem> mensagens = mensagemRepository.findAll();
+		
+		assertThat(mensagens).hasSize((int) mensagemRepository.count());
+	}
+	
+	@Test
+	void listByIdShouldBeSuccessful() {
+		Mensagem foundMensagem = mensagemRepository.findById(mensagem.getCodigo()).get();
+		
+		assertThat(foundMensagem).isEqualTo(mensagem);
+	}
+	
+	/*
+	 * Criar testes para verificar as falhas do CRUD
+	 * */
 }
