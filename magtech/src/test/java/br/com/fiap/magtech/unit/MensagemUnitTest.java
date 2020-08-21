@@ -49,5 +49,14 @@ class MensagemUnitTest {
 		
 		assertThat(mensagemRepository.count()).isEqualTo(expectedTotal);
 	}
+	
+	@Test
+	void updateShouldBeSuccessful() {
+		Mensagem updatedMensagem = mensagemRepository.findById(mensagem.getCodigo()).get();
+		
+		updatedMensagem.setConteudo("Outra mensagem que eu enviei");
+		
+		assertThat(mensagem).isEqualTo(updatedMensagem);
+	}
 
 }
