@@ -1,4 +1,4 @@
-package br.com.fiap.magtech.entity;
+package br.com.fiap.magtech.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +19,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import br.com.fiap.magtech.entity.emum.Genero;
 
@@ -55,8 +53,12 @@ public abstract class Usuario {
 	@Column(name = "ds_genero", length = 16, nullable = false)
 	protected Genero genero;
 
+	@Column(name = "st_visibilidade", precision = 1, nullable = false)
+	protected int visibilidade;
+	
 	@Column(name = "ds_bio", length = 100, nullable = true)
 	protected String bio;
+	
 
 	// RELACIONAMENTO
 	
@@ -69,9 +71,6 @@ public abstract class Usuario {
 	
 	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private UsuarioComum usuarioComum;  
-	
-	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private ConfiguracaoGeral configGeral;
 	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 	private List<Post> posts = new ArrayList<Post>();	
@@ -210,14 +209,6 @@ public abstract class Usuario {
 
 	public void setUsuarioComum(UsuarioComum usuarioComum) {
 		this.usuarioComum = usuarioComum;
-	}
-
-	public ConfiguracaoGeral getConfigGeral() {
-		return configGeral;
-	}
-
-	public void setConfigGeral(ConfiguracaoGeral configGeral) {
-		this.configGeral = configGeral;
 	}
 
 	// Metodo para adicionar um post � lista do usu�rio

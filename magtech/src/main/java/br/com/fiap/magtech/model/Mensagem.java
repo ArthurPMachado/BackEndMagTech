@@ -1,18 +1,14 @@
-package br.com.fiap.magtech.entity;
+package br.com.fiap.magtech.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "T_MAGTECH_MENSAGEM")
@@ -34,9 +30,6 @@ public class Mensagem {
 	private String imagem;
 	
 	// Foreign Key
-	
-	@OneToOne(mappedBy = "mensagem", fetch = FetchType.EAGER)
-	private ConfiguracaoGeral config;
 
 	@ManyToOne
 	@JoinColumn(name="cd_usuario")

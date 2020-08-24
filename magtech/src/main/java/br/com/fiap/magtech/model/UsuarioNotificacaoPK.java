@@ -1,4 +1,4 @@
-package br.com.fiap.magtech.entity;
+package br.com.fiap.magtech.model;
 
 import java.io.Serializable;
 

@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import br.com.fiap.magtech.entity.Comentario;
-import br.com.fiap.magtech.entity.Login;
-import br.com.fiap.magtech.entity.Post;
-import br.com.fiap.magtech.entity.UsuarioComum;
 import br.com.fiap.magtech.entity.emum.Genero;
+import br.com.fiap.magtech.model.Comentario;
+import br.com.fiap.magtech.model.Login;
+import br.com.fiap.magtech.model.Post;
+import br.com.fiap.magtech.model.UsuarioComum;
 import br.com.fiap.magtech.repository.ComentarioRepository;
 import br.com.fiap.magtech.repository.LoginRepository;
 import br.com.fiap.magtech.repository.PostRepository;

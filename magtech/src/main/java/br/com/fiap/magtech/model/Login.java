@@ -1,4 +1,4 @@
-package br.com.fiap.magtech.entity;
+package br.com.fiap.magtech.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,6 +28,9 @@ public class Login {
 	
 	@Column(name = "ds_registro", length = 12, unique = true)
 	private String registro;
+	
+	@Column(name = "st_verificacao_duas_etapas", precision = 1)
+	private int verificacaoDuasEtapas;
 	
 	// Relacionamento
 	

@@ -1,4 +1,4 @@
-package br.com.fiap.magtech.entity;
+package br.com.fiap.magtech.model;
 
 import java.util.List;
 
@@ -11,12 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="T_MAGTECH_POST")
@@ -51,9 +48,6 @@ public class Post {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "cd_usuario", nullable = false)
 	private Usuario usuario;
-	
-	@OneToOne(mappedBy = "post", fetch = FetchType.EAGER)
-	private ConfiguracaoGeral configGeral;
 	
 	@OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 	private List<Comentario> comentarios;
@@ -150,13 +144,6 @@ public class Post {
 		this.usuario = usuario;
 	}
 
-	public ConfiguracaoGeral getConfigGeral() {
-		return configGeral;
-	}
-
-	public void setConfigGeral(ConfiguracaoGeral configGeral) {
-		this.configGeral = configGeral;
-	}
 	public List<Comentario> getComentarios() {
 		return comentarios;
 	}
