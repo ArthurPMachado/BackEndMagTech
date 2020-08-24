@@ -2,7 +2,6 @@ package br.com.fiap.magtech.unit;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,13 +10,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import br.com.fiap.magtech.entity.Login;
 import br.com.fiap.magtech.entity.ProfissionalSaude;
-import br.com.fiap.magtech.entity.UsuarioComum;
 import br.com.fiap.magtech.entity.emum.Genero;
 import br.com.fiap.magtech.repository.LoginRepository;
 import br.com.fiap.magtech.repository.ProfissionalSaudeRepository;
-import br.com.fiap.magtech.repository.UsuarioComumRepository;
 
-@SuppressWarnings("unused")
 @DataJpaTest
 class ProfissionalSaudeUnitTest {
 	
@@ -35,19 +31,19 @@ class ProfissionalSaudeUnitTest {
 	void populateDataForTest() {
 		login = repositoryLogin.save(new Login("algumacoisa@gmail.com", "123456"));
 		profissionalSaude = repositoryProfissional.save(new ProfissionalSaude("Braufagélio", "01/01/2000", "foto.com", "SP", 924246969,
-																	Genero.Masculino, login,"1234/3", "Cardiologista", "DBC"));
+															Genero.Masculino, login,"1234/3", "Cardiologista", "DBC"));
 		
 		Login login0 = repositoryLogin.save(new Login("algumacoisa1@gmail.com", "123456"));
-		ProfissionalSaude profissionalSaude0 = repositoryProfissional.save(new ProfissionalSaude("Francinaldo", "01/01/2000", "foto.com", "SP", 924246969,
-																	Genero.Masculino, login0,"1234/4", "èdiatra", "DDS"));
+		repositoryProfissional.save(new ProfissionalSaude("Francinaldo", "01/01/2000", "foto.com", "SP", 924246969,
+															Genero.Masculino, login0,"1234/4", "èdiatra", "DDS"));
 	}
 	
 	@Test
 	void createShouldBeSuccessful() {
 		long expectedTotal = repositoryProfissional.count() + 1;
 		Login login1 = repositoryLogin.save(new Login("algumacoisa2@gmail.com", "123456"));
-		ProfissionalSaude profissionalSaude1 = repositoryProfissional.save(new ProfissionalSaude("Judiscrei", "01/01/2000", "foto.com", "SP", 924246969,
-																	Genero.Masculino, login1, "1112223/4", "AlgumaCoisa", "ABC"));
+		repositoryProfissional.save(new ProfissionalSaude("Judiscrei", "01/01/2000", "foto.com", "SP", 924246969,
+										Genero.Masculino, login1, "1112223/4", "AlgumaCoisa", "ABC"));
 		assertThat(repositoryProfissional.count()).isEqualTo(expectedTotal);
 	}
 	
@@ -69,7 +65,6 @@ class ProfissionalSaudeUnitTest {
 	void deleteByIdShouldBeSuccessful()	{
 		ProfissionalSaude usuarioWillBeDeleted = repositoryProfissional.findById(profissionalSaude.getCodigo()).get();
 		long expectedSize = repositoryProfissional.count() - 1;
-
 		// expected Size of repository after delete operation
 		repositoryProfissional.deleteById(usuarioWillBeDeleted.getCodigo());
 		

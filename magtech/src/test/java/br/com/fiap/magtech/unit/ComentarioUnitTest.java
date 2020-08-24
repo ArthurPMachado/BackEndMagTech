@@ -39,7 +39,6 @@ class ComentarioUnitTest {
 	private Login login;
 
 	@BeforeEach
-	@SuppressWarnings("unused")
 	void create() {
 		login = loginRepository.save(new Login("algumacoisa@gmail.com", "123456"));
 		usuarioComum = usuarioComumRepository.save(new UsuarioComum("João Pereira da Silva", "25/02/1988", "http://localdafoto", "SP", 11978456913L, Genero.Masculino, login, "AB-", 0, 0, 1));

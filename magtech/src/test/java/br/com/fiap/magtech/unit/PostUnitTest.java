@@ -32,29 +32,31 @@ class PostUnitTest {
 	private UsuarioComum usuarioComum;
 	
 	@BeforeEach
-	@SuppressWarnings("unused")
 	void populateDataForTest() {
 		usuarioLogin = loginRepository.save(new Login("algumacoisa@gmail.com", "123456"));
-		usuarioComum = usuarioComumRepository.save(new UsuarioComum("Braufagélio", "01/01/2000", "foto.com", "SP", 924246969 ,Genero.Masculino, usuarioLogin,"AB", 0, 0, 0));
+		usuarioComum = usuarioComumRepository.save(new UsuarioComum("Braufagélio", "01/01/2000", "foto.com", "SP", 924246969,
+													Genero.Masculino, usuarioLogin,"AB", 0, 0, 0));
 		
 		post = postRepository.save(new Post("P", 1, 11111111111L, "blablabla", 1, "imagem", usuarioComum));
-		Post postUserComum = postRepository.save(new Post("P1", 1, 11111111111L, "blablabla", 1, "imagem", usuarioComum));
-		Post postUserComum1 = postRepository.save(new Post("P2", 1, 11111111111L, "blablabla", 1, "imagem", usuarioComum));
+		postRepository.save(new Post("P1", 1, 11111111111L, "blablabla", 1, "imagem", usuarioComum));
+		postRepository.save(new Post("P2", 1, 11111111111L, "blablabla", 1, "imagem", usuarioComum));
 	}
 	
 	@Test
 	void createShouldBeSuccessful() {
-		assertThat(postRepository.count()).isEqualTo(3);
+		long expectedTotal = postRepository.count() + 1;
+		Login usuarioLogin2 = loginRepository.save(new Login("alguem@gmail.com", "123456"));
+		UsuarioComum usuarioComum2 = usuarioComumRepository.save(new UsuarioComum("Braufagélio", "01/01/2000", "foto.com", "SP", 924246969,
+													Genero.Masculino, usuarioLogin2,"AB", 0, 0, 0));
+		postRepository.save(new Post("P1", 1, 11111111111L, "blablabla", 1, "imagem", usuarioComum2));
+		assertThat(postRepository.count()).isEqualTo(expectedTotal);
 	}
 	
 	@Test
 	void UpdateShouldBeSuccessful() {
 		Post updatedPost = postRepository.findById(post.getCodigo()).get();
-		
 		updatedPost.setConteudo("Novo conteudo");
-		
 		postRepository.save(updatedPost);
-		
 		assertThat(updatedPost.getConteudo()).isEqualTo(post.getConteudo());
 	}
 	
@@ -69,7 +71,6 @@ class PostUnitTest {
 		Post postWillBeDeleted = postRepository.findById(post.getCodigo()).get();
 		// expected Size of repository after delete operation
 		long expectedSize = postRepository.count() - 1;
-		
 		postRepository.deleteById(postWillBeDeleted.getCodigo());
 		assertThat(postRepository.count()).isEqualTo(expectedSize);
 	}
@@ -77,14 +78,12 @@ class PostUnitTest {
 	@Test
 	void listAllShouldBeSuccessful() {
 		Iterable<Post> posts = postRepository.findAll();
-		
 		assertThat(posts).hasSize((int) postRepository.count());
 	}
 	
 	@Test
 	void listByIdShouldBeSuccessful() {
 		Post foundPost = postRepository.findById(post.getCodigo()).get();
-		
 		assertThat(foundPost).isEqualTo(post);
 	}
 }
