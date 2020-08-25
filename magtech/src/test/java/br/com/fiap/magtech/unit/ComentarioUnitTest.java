@@ -40,7 +40,7 @@ class ComentarioUnitTest {
 
 	@BeforeEach
 	@SuppressWarnings("unused")
-	void create() {
+	void populateDataForTest() {
 		login = loginRepository.save(new Login("algumacoisa@gmail.com", "123456"));
 		usuarioComum = usuarioComumRepository.save(new UsuarioComum("João Pereira da Silva", "25/02/1988", "http://localdafoto", "SP", 11978456913L, Genero.Masculino, login, "AB-", 0, 0, 1));
 		post = postRepository.save(new Post("Um post retratando a realidade da pandemia", 1, System.currentTimeMillis(), "Algum conteudo relevante ou uma imagem", usuarioComum));

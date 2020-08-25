@@ -29,6 +29,13 @@ public class UsuarioNotificacao {
 	public UsuarioNotificacao() {
 		super();
 	}
+	
+	public UsuarioNotificacao(Usuario usuario, Notificacao notificacao, long recebimento) {
+		super();
+		this.usuario = usuario;
+		this.notificacao = notificacao;
+		this.recebimento = recebimento;
+	}
 
 	public long getRecebimento() {
 		return recebimento;

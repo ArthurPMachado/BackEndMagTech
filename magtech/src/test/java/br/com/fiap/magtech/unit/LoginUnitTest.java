@@ -20,7 +20,7 @@ class LoginUnitTest {
 
 	@BeforeEach
 	@SuppressWarnings("unused")
-	void create() {
+	void populateDataForTest() {
 		login = repository.save(new Login("algumacoisa@gmail.com", "123456"));
 		Login login2 = repository.save(new Login("algumacoisa2@gmail.com", "123456"));
 		Login login3 = repository.save(new Login("algumacoisa3@gmail.com", "123456"));

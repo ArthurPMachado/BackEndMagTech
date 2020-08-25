@@ -32,7 +32,6 @@ public class Notificacao {
 	
 	public Notificacao() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Notificacao(String descricao, String icone) {
