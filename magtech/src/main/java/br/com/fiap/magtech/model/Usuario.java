@@ -20,7 +20,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import br.com.fiap.magtech.entity.emum.Genero;
+import br.com.fiap.magtech.model.emum.Genero;
 
 @Inheritance(strategy = InheritanceType.JOINED)
 

@@ -7,7 +7,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import br.com.fiap.magtech.entity.emum.Genero;
+import br.com.fiap.magtech.model.emum.Genero;
 
 @Entity
 @Table(name = "T_MAGTECH_PROFISSIONAL_SAUDE")
