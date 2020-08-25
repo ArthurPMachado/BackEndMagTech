@@ -33,5 +33,51 @@ class NotificacaoUnitTest {
 		
 		assertThat(repository.count()).isEqualTo(expectedTotal);
 	}
+	
+	@Test
+	void updateShouldBeSuccessful() {
+		Notificacao updatedNotificacao = repository.findById(notificacao.getCodigo()).get();
+		
+		updatedNotificacao.setDescricao("Alterando a mensagem que chegou a você");
+		
+		repository.save(updatedNotificacao);
+		
+		assertThat(updatedNotificacao).isEqualTo(notificacao);
+	}
+	
+	@Test
+	void repositoryShouldBeEmpty() {
+		repository.deleteAll();
+		
+		assertThat(repository.count()).isEqualTo(0);
+	}
 
+	@Test
+	void deleteShouldBeSuccessful() {
+		Notificacao willBeDeletedNotificacao = repository.findById(notificacao.getCodigo()).get();
+		
+		long expected = repository.count() - 1;
+		
+		repository.deleteById(willBeDeletedNotificacao.getCodigo());
+		
+		assertThat(repository.count()).isEqualTo(expected);
+	}
+	
+	@Test
+	void listAllShouldBeSuccessful() {
+		Iterable<Notificacao> notificacoes = repository.findAll();
+		
+		assertThat(notificacoes).hasSize((int) repository.count());
+	}
+	
+	@Test
+	void listSingleShouldBeSuccessful() {
+		Notificacao foundNotificacao = repository.findById(notificacao.getCodigo()).get();
+		
+		assertThat(foundNotificacao).isEqualTo(notificacao);
+	}
+	
+	/*
+	 * Criar testes para verificar as falhas do CRUD
+	 * */
 }
