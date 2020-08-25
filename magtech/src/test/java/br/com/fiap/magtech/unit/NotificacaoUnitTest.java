@@ -19,6 +19,7 @@ class NotificacaoUnitTest {
 	private Notificacao notificacao;
 	
 	@BeforeEach
+	@SuppressWarnings("unused")
 	void populateDataForTest() {
 		notificacao = repository.save(new Notificacao("Chegou nova mensagem para você!", "http://iconedanotificacao"));
 		Notificacao notificacao2 = repository.save(new Notificacao("Chegou nova mensagem para você!", "http://iconedanotificacao"));
@@ -28,6 +29,7 @@ class NotificacaoUnitTest {
 	@Test
 	void createShouldBeSuccessful() {
 		long expectedTotal = repository.count() + 1;
+	
 		
 		Notificacao notificacao4 = repository.save(new Notificacao("Chegou nova mensagem para você!", "http://iconedanotificacao"));
 		
