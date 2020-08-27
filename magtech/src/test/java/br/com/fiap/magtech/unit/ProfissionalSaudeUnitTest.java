@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import br.com.fiap.magtech.entity.Login;
-import br.com.fiap.magtech.entity.ProfissionalSaude;
-import br.com.fiap.magtech.entity.emum.Genero;
+import br.com.fiap.magtech.model.Login;
+import br.com.fiap.magtech.model.ProfissionalSaude;
+import br.com.fiap.magtech.model.emum.Genero;
 import br.com.fiap.magtech.repository.LoginRepository;
 import br.com.fiap.magtech.repository.ProfissionalSaudeRepository;
 

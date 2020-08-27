@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import br.com.fiap.magtech.entity.Comentario;
-import br.com.fiap.magtech.entity.Login;
-import br.com.fiap.magtech.entity.Post;
-import br.com.fiap.magtech.entity.UsuarioComum;
-import br.com.fiap.magtech.entity.emum.Genero;
+import br.com.fiap.magtech.model.Comentario;
+import br.com.fiap.magtech.model.Login;
+import br.com.fiap.magtech.model.Post;
+import br.com.fiap.magtech.model.UsuarioComum;
+import br.com.fiap.magtech.model.emum.Genero;
 import br.com.fiap.magtech.repository.ComentarioRepository;
 import br.com.fiap.magtech.repository.LoginRepository;
 import br.com.fiap.magtech.repository.PostRepository;
@@ -39,19 +39,23 @@ class ComentarioUnitTest {
 	private Login login;
 
 	@BeforeEach
-	void create() {
+	void populateDataForTest() {
 		login = loginRepository.save(new Login("algumacoisa@gmail.com", "123456"));
 		usuarioComum = usuarioComumRepository.save(new UsuarioComum("João Pereira da Silva", "25/02/1988", "http://localdafoto", "SP", 11978456913L, Genero.Masculino, login, "AB-", 0, 0, 1));
 		post = postRepository.save(new Post("Um post retratando a realidade da pandemia", 1, System.currentTimeMillis(), "Algum conteudo relevante ou uma imagem", usuarioComum));
 		
 		comentario = comentarioRepository.save(new Comentario(System.currentTimeMillis(), "Algum comentário feito pelo usuário", "http://imagemenviada", post));
-		Comentario comentario2 = comentarioRepository.save(new Comentario(System.currentTimeMillis(), "Algum comentário feito pelo usuário", "http://imagemenviada", post));
-		Comentario comentario3 = comentarioRepository.save(new Comentario(System.currentTimeMillis(), "Algum comentário feito pelo usuário", "http://imagemenviada", post));
+		comentarioRepository.save(new Comentario(System.currentTimeMillis(), "Algum comentário feito pelo usuário", "http://imagemenviada", post));
+		comentarioRepository.save(new Comentario(System.currentTimeMillis(), "Algum comentário feito pelo usuário", "http://imagemenviada", post));
 	}
 	
 	@Test
 	void createShouldBeSuccessful() {
-		assertThat(comentarioRepository.count()).isEqualTo(3);
+		long expectedTotal = comentarioRepository.count() + 1;
+		
+		comentarioRepository.save(new Comentario(System.currentTimeMillis(), "Algum comentário feito pelo usuário", "http://imagemenviada", post));
+		
+		assertThat(comentarioRepository.count()).isEqualTo(expectedTotal);
 	}
 	
 	@Test
