@@ -2,15 +2,17 @@ package br.com.fiap.magtech.unit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import br.com.fiap.magtech.entity.Login;
-import br.com.fiap.magtech.entity.Post;
-import br.com.fiap.magtech.entity.UsuarioComum;
-import br.com.fiap.magtech.entity.emum.Genero;
+import br.com.fiap.magtech.model.Login;
+import br.com.fiap.magtech.model.Post;
+import br.com.fiap.magtech.model.UsuarioComum;
+import br.com.fiap.magtech.model.emum.Genero;
 import br.com.fiap.magtech.repository.LoginRepository;
 import br.com.fiap.magtech.repository.PostRepository;
 import br.com.fiap.magtech.repository.UsuarioComumRepository;
@@ -37,7 +39,7 @@ class PostUnitTest {
 		usuarioComum = usuarioComumRepository.save(new UsuarioComum("Braufagélio", "01/01/2000", "foto.com", "SP", 924246969,
 													Genero.Masculino, usuarioLogin,"AB", 0, 0, 0));
 		
-		post = postRepository.save(new Post("P", 1, 11111111111L, "blablabla", 1, "imagem", usuarioComum));
+		post = postRepository.save(new Post("Testando Select", 1, 11111111111L, "blablabla", 1, "imagem", usuarioComum));
 		postRepository.save(new Post("P1", 1, 11111111111L, "blablabla", 1, "imagem", usuarioComum));
 		postRepository.save(new Post("P2", 1, 11111111111L, "blablabla", 1, "imagem", usuarioComum));
 	}
@@ -85,5 +87,11 @@ class PostUnitTest {
 	void listByIdShouldBeSuccessful() {
 		Post foundPost = postRepository.findById(post.getCodigo()).get();
 		assertThat(foundPost).isEqualTo(post);
+	}
+	
+	@Test
+	void testeFindByTitulo() {
+		List<Post> posts = postRepository.findByTitulo("Testando Select");
+		assertThat(posts.get(0).getTitulo()).isEqualTo("Testando Select");
 	}
 }
