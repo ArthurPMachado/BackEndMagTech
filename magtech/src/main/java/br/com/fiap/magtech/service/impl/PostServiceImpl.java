@@ -43,10 +43,10 @@ public class PostServiceImpl implements PostService{
 
 	@Override
 	public Post findById(int id) throws KeyNotFoundException {
-		Optional<Post> foundoPost = repository.findById(id);
+		Optional<Post> foundPost = repository.findById(id);
 		Post post = null;
-		if(foundoPost.isPresent()) {
-			post = foundoPost.get();
+		if(foundPost.isPresent()) {
+			post = foundPost.get();
 		} else {
 			throw new KeyNotFoundException("Post não encontrado");
 		}
