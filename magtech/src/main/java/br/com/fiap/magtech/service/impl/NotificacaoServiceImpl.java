@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.fiap.magtech.exception.KeyNotFoundException;
 import br.com.fiap.magtech.model.Notificacao;
 import br.com.fiap.magtech.repository.NotificacaoRepository;
 import br.com.fiap.magtech.service.NotificacaoService;
 
+@Service
 public class NotificacaoServiceImpl implements NotificacaoService {
 
 	private NotificacaoRepository repository;
