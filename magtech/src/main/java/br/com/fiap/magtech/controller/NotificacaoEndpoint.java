@@ -17,7 +17,7 @@ import br.com.fiap.magtech.model.Notificacao;
 import br.com.fiap.magtech.service.NotificacaoService;
 
 @RestController
-@RequestMapping("/notidicacao")
+@RequestMapping("/notificacao")
 public class NotificacaoEndpoint {
 	
 	private final NotificacaoService dao;

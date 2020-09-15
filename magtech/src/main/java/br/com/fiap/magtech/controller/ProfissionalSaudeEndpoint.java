@@ -17,7 +17,7 @@ import br.com.fiap.magtech.model.ProfissionalSaude;
 import br.com.fiap.magtech.service.ProfissionalSaudeService;
 
 @RestController
-@RequestMapping("/ProfissinalSaude")
+@RequestMapping("/profissionais")
 public class ProfissionalSaudeEndpoint {
 	
 	private final ProfissionalSaudeService profissionalSaudeDao;

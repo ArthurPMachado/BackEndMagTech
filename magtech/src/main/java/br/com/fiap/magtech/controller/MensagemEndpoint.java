@@ -17,7 +17,7 @@ import br.com.fiap.magtech.model.Mensagem;
 import br.com.fiap.magtech.service.MensagemService;
 
 @RestController
-@RequestMapping("/mensagem")
+@RequestMapping("/mensagens")
 public class MensagemEndpoint {
 	
 	private final MensagemService dao;

@@ -17,7 +17,7 @@ import br.com.fiap.magtech.model.Post;
 import br.com.fiap.magtech.service.PostService;
 
 @RestController
-@RequestMapping("/post")
+@RequestMapping("/posts")
 public class PostEndpoint {
 
 	private final PostService postDao;

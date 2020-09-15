@@ -17,7 +17,7 @@ import br.com.fiap.magtech.model.UsuarioComum;
 import br.com.fiap.magtech.service.UsuarioComumService;
 
 @RestController
-@RequestMapping("/UsuarioComum")
+@RequestMapping("/usuarios")
 public class UsuarioComumEndpoint {
 	
 	private final UsuarioComumService usuarioComumDao;
