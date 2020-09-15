@@ -7,10 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import br.com.fiap.magtech.model.Login;
 import br.com.fiap.magtech.model.Notificacao;
 import br.com.fiap.magtech.model.UsuarioComum;
 import br.com.fiap.magtech.model.UsuarioNotificacao;
-import br.com.fiap.magtech.model.Login;
+import br.com.fiap.magtech.model.UsuarioNotificacaoPK;
 import br.com.fiap.magtech.model.emum.Genero;
 import br.com.fiap.magtech.repository.LoginRepository;
 import br.com.fiap.magtech.repository.NotificacaoRepository;
@@ -42,7 +43,7 @@ class UsuarioNotificacaoUnitTest {
 	void populateDataForTest() {
 		login = loginRepository.save(new Login("algumacoisa@gmail.com", "123456"));
 		usuarioComum = usuarioComumRepository.save(new UsuarioComum("João Pereira da Silva", "25/02/1988", "http://localdafoto", "SP", 11978456913L, Genero.Masculino, login, "AB-", 0, 0, 1));
-		notificacao = notificacaoRepository.save(new Notificacao("Chegou nova mensagem para você!", "http://iconedanotificacao"));
+		notificacao = notificacaoRepository.save(new Notificacao("Chegou nova mensagem para você pra testar!", "http://iconedanotificacao"));
 		Notificacao notificacao2 = notificacaoRepository.save(new Notificacao("Chegou nova mensagem para você!", "http://iconedanotificacao"));
 		Notificacao notificacao3 = notificacaoRepository.save(new Notificacao("Chegou nova mensagem para você!", "http://iconedanotificacao"));
 		
@@ -54,9 +55,7 @@ class UsuarioNotificacaoUnitTest {
 	@Test
 	void createShouldBeSuccessful() {
 		long expectedTotal = usuarioNotificacaoRepository.count() + 1;
-		
-		System.out.println(expectedTotal);
-		
+				
 		Notificacao notificacao4 = notificacaoRepository.save(new Notificacao("Chegou nova mensagem para você!", "http://iconedanotificacao"));
 		usuarioNotificacaoRepository.save(new UsuarioNotificacao(usuarioComum, notificacao4, System.currentTimeMillis()));
 		
@@ -69,17 +68,19 @@ class UsuarioNotificacaoUnitTest {
 		
 		assertThat(usuarioNotificacaoRepository.count()).isEqualTo(0);
 	}
-	/*
+	
 	@Test
-	void deleteShouldBeSuccessful() {
-		UsuarioNotificacao willBeDeletedUsuarioNotificacao = usuarioNotificacaoRepository.findById(usuarioNotificacao.getUsuario().getCodigo()).get();
+	void deleteByNotificacaoShouldBeSuccessful() {
+		UsuarioNotificacaoPK pks = new UsuarioNotificacaoPK(usuarioComum.getCodigo(), notificacao.getCodigo());
 		
-		long expected = usuarioComumRepository.count() - 1;
+		UsuarioNotificacao willBeDeletedUsuarioNotificacao = usuarioNotificacaoRepository.findById(pks).get();
 		
-		usuarioNotificacaoRepository.deleteById(willBeDeletedUsuarioNotificacao.getUsuario().getCodigo());
+		long expected = usuarioNotificacaoRepository.count() - 1;
+		
+		usuarioNotificacaoRepository.delete(willBeDeletedUsuarioNotificacao);
 		
 		assertThat(usuarioNotificacaoRepository.count()).isEqualTo(expected);
 	}
-	*/
+	
 
 }

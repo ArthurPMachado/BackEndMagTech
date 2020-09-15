@@ -2,6 +2,7 @@ package br.com.fiap.magtech.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class Notificacao {
 	@Column(name="fl_icone", nullable=false, length=200)
 	private String icone;
 
-	@OneToMany(mappedBy = "notificacao")
+	@OneToMany(mappedBy = "notificacao", cascade = CascadeType.REMOVE)
 	private List<UsuarioNotificacao> notificacoes;
 	
 	public Notificacao() {
