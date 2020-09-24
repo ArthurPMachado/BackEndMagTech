@@ -20,6 +20,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import br.com.fiap.magtech.model.emum.Genero;
 
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -27,6 +30,10 @@ import br.com.fiap.magtech.model.emum.Genero;
 @Entity
 @Table(name = "T_MAGTECH_USUARIO")
 @SequenceGenerator(name = "usuario", sequenceName = "SQ_TB_USUARIO", allocationSize = 1)
+@JsonIdentityInfo(
+		 generator = ObjectIdGenerators.PropertyGenerator.class,
+		 property = "codigo"
+)
 public abstract class Usuario {
 
 	@Id
