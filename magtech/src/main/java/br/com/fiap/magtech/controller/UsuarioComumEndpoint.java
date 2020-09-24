@@ -20,7 +20,7 @@ import br.com.fiap.magtech.service.UsuarioComumService;
 @RequestMapping("/usuarios")
 public class UsuarioComumEndpoint {
 	
-	private final UsuarioComumService usuarioComumDao;
+	private UsuarioComumService usuarioComumDao;
 	
 	@Autowired
 	public UsuarioComumEndpoint(UsuarioComumService usuarioComumDao) {
@@ -29,14 +29,12 @@ public class UsuarioComumEndpoint {
 	
 	@PostMapping
 	public ResponseEntity<?> insertUsuarioComum(@RequestBody UsuarioComum usuarioComum){
-		usuarioComumDao.save(usuarioComum);
-		return new ResponseEntity<> (HttpStatus.CREATED);
+		return new ResponseEntity<> (usuarioComumDao.save(usuarioComum), HttpStatus.CREATED);
 	}
 	
 	@PutMapping
 	public ResponseEntity<?> updateUsuarioComum(@RequestBody UsuarioComum usuarioComum) {
-		usuarioComumDao.save(usuarioComum);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>(usuarioComumDao.save(usuarioComum), HttpStatus.OK);
 	}
 	
 	@DeleteMapping
@@ -45,7 +43,7 @@ public class UsuarioComumEndpoint {
 		return new ResponseEntity<> (HttpStatus.NO_CONTENT);
 	}
 	
-	@DeleteMapping("/{id")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteUsuarioComum(@PathVariable int id) throws KeyNotFoundException{
 		UsuarioComum foundUsuario = usuarioComumDao.findById(id);
 		if(foundUsuario == null) {
@@ -57,14 +55,14 @@ public class UsuarioComumEndpoint {
 	
 	@GetMapping
 	public ResponseEntity<?> listAll() {
-		return new ResponseEntity<> (usuarioComumDao.findAll(), HttpStatus.FOUND);
+		return new ResponseEntity<> (usuarioComumDao.findAll(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> getUsuarioComum(@PathVariable int id) throws KeyNotFoundException{
+	public ResponseEntity<?> getUsuarioComumById(@PathVariable("id") int id) throws KeyNotFoundException{
 		UsuarioComum foundUsuario = usuarioComumDao.findById(id);
 		if(foundUsuario == null) {
-			throw new KeyNotFoundException("Usuario Comum não encontrado");
+			 return new ResponseEntity<>(new KeyNotFoundException("Usuario Comum não encontrado"), HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(foundUsuario, HttpStatus.FOUND);
 	}

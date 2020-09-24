@@ -7,7 +7,7 @@ import br.com.fiap.magtech.model.UsuarioComum;;
 
 public interface UsuarioComumService {
 	
-	void save(UsuarioComum usuarioComum);	
+	UsuarioComum save(UsuarioComum usuarioComum);	
 	
 	void deleteAll();
 	

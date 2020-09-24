@@ -23,8 +23,8 @@ public class UsuarioComumServiceImpl implements UsuarioComumService{
 	}
 
 	@Override
-	public void save(UsuarioComum usuarioComum) {
-		repository.save(usuarioComum);
+	public UsuarioComum save(UsuarioComum usuarioComum) {
+		return repository.save(usuarioComum);
 	}
 
 	@Override
