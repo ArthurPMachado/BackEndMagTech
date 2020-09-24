@@ -1,6 +1,5 @@
 package br.com.fiap.magtech.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,7 +33,7 @@ public class Login {
 	
 	// Relacionamento
 	
-	@OneToOne(mappedBy = "login", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "login")
 	private Usuario usuario;
 	
 	public Login(String email, String senha, String registro) {
@@ -78,7 +77,7 @@ public class Login {
 	public void setRegistro(String registro) {
 		this.registro = registro;
 	}
-
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -86,5 +85,6 @@ public class Login {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	
 	
 }

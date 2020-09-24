@@ -62,7 +62,7 @@ public abstract class Usuario {
 
 	// RELACIONAMENTO
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "cd_login", nullable = false)
 	protected Login login;
 	

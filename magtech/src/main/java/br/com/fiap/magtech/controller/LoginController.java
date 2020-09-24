@@ -22,7 +22,7 @@ import br.com.fiap.magtech.service.LoginService;
 @RequestMapping("/logins")
 public class LoginController {
 
-	private LoginService service;
+	private final LoginService service;
 
 	@Autowired
 	public LoginController(LoginService service) {
