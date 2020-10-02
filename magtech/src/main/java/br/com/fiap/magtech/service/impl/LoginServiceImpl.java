@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.fiap.magtech.exception.EmailNotFoundException;
 import br.com.fiap.magtech.exception.KeyNotFoundException;
 import br.com.fiap.magtech.model.Login;
 import br.com.fiap.magtech.repository.LoginRepository;
@@ -49,6 +50,21 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public void deleteById(int id) {
 		repository.deleteById(id);
+	}
+
+	@Override
+	public Login findByEmail(String email) throws EmailNotFoundException {
+		Optional<Login> foundLogin = repository.findByEmail(email);
+		
+		Login login;
+		
+		if(foundLogin.isPresent()) {
+			login = foundLogin.get();
+		} else {
+			throw new EmailNotFoundException("Esse login não pode ser encontrado");
+		}
+		
+		return login;
 	}
 
 }
