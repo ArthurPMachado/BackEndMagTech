@@ -67,6 +67,12 @@ class LoginUnitTest {
 		assertThat(foundLogin).isEqualTo(login);
 	}
 
+	@Test
+	void listByEmailShouldBeSuccessful() {
+		Login foundLogin = repository.findByEmail("algumacoisa@gmail.com").get();
+		assertThat(foundLogin).isEqualTo(login);
+	}
+	
 	/*
 	 * Criar testes para verificar as falhas do CRUD
 	 * */

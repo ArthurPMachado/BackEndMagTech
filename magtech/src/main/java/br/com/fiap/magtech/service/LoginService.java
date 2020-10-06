@@ -2,6 +2,7 @@ package br.com.fiap.magtech.service;
 
 import java.util.List;
 
+import br.com.fiap.magtech.exception.EmailNotFoundException;
 import br.com.fiap.magtech.exception.KeyNotFoundException;
 import br.com.fiap.magtech.model.Login;
 
@@ -15,4 +16,5 @@ public interface LoginService {
 	
 	void deleteById(int id) throws KeyNotFoundException;
 
+	Login findByEmail(String email) throws EmailNotFoundException;
 }

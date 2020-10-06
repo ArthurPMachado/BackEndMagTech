@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fiap.magtech.exception.EmailNotFoundException;
 import br.com.fiap.magtech.exception.KeyNotFoundException;
 import br.com.fiap.magtech.model.Login;
 import br.com.fiap.magtech.service.LoginService;
@@ -49,6 +50,15 @@ public class LoginController {
 			throw new KeyNotFoundException("O login não existe para esse usuário");
 		}
 		
+		return foundLogin;
+	}
+	
+	@GetMapping("/{email}")
+	public Login getEmail(@PathVariable String email) throws EmailNotFoundException {
+		Login foundLogin = service.findByEmail(email);	
+		if(foundLogin == null) {
+			throw new EmailNotFoundException("O Email não existe");
+		}
 		return foundLogin;
 	}
 	
