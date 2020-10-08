@@ -82,4 +82,14 @@ public class LoginController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
+	@GetMapping("/{email}")
+	public Login loginAuthetication(@RequestBody Login login) throws Exception{
+		Login foundLogin = service.verifyPassword(login);
+		if(foundLogin == null) {
+			throw new EmailNotFoundException("O Email não existe");
+		}
+		return foundLogin;
+	}
+	
+	
 }

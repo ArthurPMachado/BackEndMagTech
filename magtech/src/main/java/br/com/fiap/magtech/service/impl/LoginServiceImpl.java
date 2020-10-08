@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.fiap.magtech.exception.EmailNotFoundException;
+import br.com.fiap.magtech.exception.InvalidPasswordExeption;
 import br.com.fiap.magtech.exception.KeyNotFoundException;
 import br.com.fiap.magtech.model.Login;
 import br.com.fiap.magtech.repository.LoginRepository;
@@ -65,6 +66,19 @@ public class LoginServiceImpl implements LoginService {
 		}
 		
 		return login;
+	}
+	
+
+	@Override
+	public Login verifyPassword(Login login) throws Exception {
+		Login foundLogin = findByEmail(login.getEmail());
+		if (foundLogin != null) {
+			if(foundLogin.getSenha() == login.getSenha()) {
+				return foundLogin;
+			}
+			throw new InvalidPasswordExeption("Senha incorreta");
+		}
+		throw new EmailNotFoundException("Este usuário não existe");
 	}
 
 }
