@@ -17,4 +17,6 @@ public interface LoginService {
 	void deleteById(int id) throws KeyNotFoundException;
 
 	Login findByEmail(String email) throws EmailNotFoundException;
+
+	Login verifyPassword(Login login) throws Exception;
 }
