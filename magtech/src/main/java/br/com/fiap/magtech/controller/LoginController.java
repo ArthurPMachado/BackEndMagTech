@@ -53,14 +53,6 @@ public class LoginController {
 		return foundLogin;
 	}
 	
-	@GetMapping("/{email}")
-	public Login getEmail(@PathVariable String email) throws EmailNotFoundException {
-		Login foundLogin = service.findByEmail(email);	
-		if(foundLogin == null) {
-			throw new EmailNotFoundException("O Email não existe");
-		}
-		return foundLogin;
-	}
 	
 	@PutMapping
 	public ResponseEntity<?> updateLogin(@RequestBody Login login) {
@@ -82,7 +74,8 @@ public class LoginController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
-	@GetMapping("/{email}")
+	
+	@PostMapping("/login")
 	public Login loginAuthetication(@RequestBody Login login) throws Exception{
 		Login foundLogin = service.verifyPassword(login);
 		if(foundLogin == null) {
@@ -90,6 +83,7 @@ public class LoginController {
 		}
 		return foundLogin;
 	}
+	
 	
 	
 }

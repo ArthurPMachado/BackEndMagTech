@@ -73,7 +73,7 @@ public class LoginServiceImpl implements LoginService {
 	public Login verifyPassword(Login login) throws Exception {
 		Login foundLogin = findByEmail(login.getEmail());
 		if (foundLogin != null) {
-			if(foundLogin.getSenha() == login.getSenha()) {
+			if(foundLogin.getSenha().equals(login.getSenha())) {
 				return foundLogin;
 			}
 			throw new InvalidPasswordExeption("Senha incorreta");
